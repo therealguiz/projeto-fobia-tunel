@@ -3,7 +3,9 @@ guid: 56e952fd204e8274a8b1acc16c25dff0
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - targetObject: {fileID: 5119459656300087295, guid: b7424eec8dbb9b84ebfc5db000e11508, type: 3}
+  - fadeQuad: {fileID: 1591132765512646000, guid: 4c3baf47ca822f44594f03aa7e8f4574, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -1,26 +1,32 @@
 using UnityEngine;
-using UnityEngine.UI;
 
-public class VRFadeOnPosition : MonoBehaviour
+public class FadeOnPosition : MonoBehaviour
 {
     public Transform targetObject;  // Objeto a ser monitorado
     public Vector3 triggerPosition; // Posição para iniciar o fade
-    public Canvas fadeCanvas;       // Canvas no mundo VR
-    public Image fadePanel;         // Painel preto para o fade
-    public float fadeDuration = 2f; // Duração do fade
+    public Renderer fadeQuad;       // O Quad que cobre a tela
+    public float fadeDuration = 2f; // Tempo de fade
 
     private bool hasTriggered = false;
     private float fadeTimer = 0f;
 
+    void Start()
+    {
+        // Certifique-se de que o Quad comece transparente
+        if (fadeQuad != null)
+        {
+            Color color = fadeQuad.material.color;
+            fadeQuad.material.color = new Color(color.r, color.g, color.b, 0);
+        }
+    }
+
     void Update()
     {
-        // Verifica se o objeto chegou na posição desejada
         if (!hasTriggered && Vector3.Distance(targetObject.position, triggerPosition) < 0.1f)
         {
             hasTriggered = true;
         }
 
-        // Executa o fade
         if (hasTriggered)
         {
             FadeToBlack();
@@ -33,7 +39,10 @@ public class VRFadeOnPosition : MonoBehaviour
         {
             fadeTimer += Time.deltaTime;
             float alpha = Mathf.Clamp01(fadeTimer / fadeDuration);
-            fadePanel.color = new Color(0, 0, 0, alpha);
+
+            // Atualiza a transparência do Quad
+            Color color = fadeQuad.material.color;
+            fadeQuad.material.color = new Color(color.r, color.g, color.b, alpha);
         }
     }
 }
