@@ -1,17 +1,21 @@
 using UnityEngine;
 
-public class FadeOnPosition : MonoBehaviour
+public class FadeOnXPosition : MonoBehaviour
 {
-    public Transform targetObject;  // Objeto a ser monitorado
-    public Vector3 triggerPosition; // Posição para iniciar o fade
+    public Transform targetObject;  // Objeto (carro) a ser monitorado
+    public float triggerX;          // Posição X para iniciar o fade
     public Renderer fadeQuad;       // O Quad que cobre a tela
     public float fadeDuration = 2f; // Tempo de fade
 
     private bool hasTriggered = false;
     private float fadeTimer = 0f;
+    private float initialX;  // Guarda a posição inicial do carro
 
     void Start()
     {
+        // Guarda a posição X inicial do carro
+        initialX = targetObject.position.x;
+
         // Certifique-se de que o Quad comece transparente
         if (fadeQuad != null)
         {
@@ -22,13 +26,20 @@ public class FadeOnPosition : MonoBehaviour
 
     void Update()
     {
-        // Se o objeto ainda não ativou o fade e passou pela triggerPosition
-        if (!hasTriggered && targetObject.position.z >= triggerPosition.z)
+        // Verifica a direção do movimento e ativa o fade no momento certo
+        if (!hasTriggered)
         {
-            hasTriggered = true;
+            if (initialX > triggerX && targetObject.position.x <= triggerX) // Movendo de positivo para negativo
+            {
+                hasTriggered = true;
+            }
+            else if (initialX < triggerX && targetObject.position.x >= triggerX) // Movendo de negativo para positivo
+            {
+                hasTriggered = true;
+            }
         }
 
-        // Se já foi ativado, inicia o fade
+        // Se o fade foi ativado, começa a transição para preto
         if (hasTriggered)
         {
             FadeToBlack();
