@@ -8,6 +8,7 @@ TagManager:
   - TrafficStop
   - TrafficTrigger
   - Car
+  - BreakdownTrigger
   layers:
   - Default
   - TransparentFX
