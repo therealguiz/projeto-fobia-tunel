@@ -6,6 +6,7 @@ public class CarStop : MonoBehaviour
     public float speed = 5f; // Velocidade do carro
     public float stopDuration = 3f; // Tempo parado antes de continuar
     private bool isStopped = false;
+    private bool hasActivated = false;
 
     void Update()
     {
@@ -17,8 +18,9 @@ public class CarStop : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("TrafficStop"))
+        if (!hasActivated && other.CompareTag("TrafficStop"))
         {
+            hasActivated = true;
             StartCoroutine(StopCar());
         }
     }
