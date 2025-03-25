@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class FadeOnXPosition : MonoBehaviour
 {
+    public AudioSource audioSource;
     public Transform targetObject;  // Objeto (carro) a ser monitorado
     public float triggerX;          // Posição X para iniciar o fade
     public Renderer fadeQuad;       // O Quad que cobre a tela
@@ -43,6 +44,7 @@ public class FadeOnXPosition : MonoBehaviour
         if (hasTriggered)
         {
             FadeToBlack();
+            audioSource.Stop();
         }
     }
 

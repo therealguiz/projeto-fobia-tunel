@@ -9,6 +9,7 @@ TagManager:
   - TrafficTrigger
   - Car
   - BreakdownTrigger
+  - TrafficSFX
   layers:
   - Default
   - TransparentFX

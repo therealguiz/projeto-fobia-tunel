@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class CarController : MonoBehaviour
 {
+    public AudioSource audioSource;
+    public AudioSource audioSourceStop;
+    public AudioSource audioLight;
     public float speed = 10f;  // Velocidade do carro
     public float deceleration = 2f;  // Taxa de desaceleração
     public ParticleSystem smokeEffect;  // Sistema de partículas da fumaça
@@ -39,8 +42,12 @@ public class CarController : MonoBehaviour
         // Verifica se o carro atingiu o trigger para começar a desaceleração
         if (other.CompareTag("BreakdownTrigger"))
         {
+            audioSource.Play();
+            audioSourceStop.Stop();
+            audioLight.Play();
             isSlowingDown = true;  // Inicia a desaceleração
             StartCoroutine(StopCar());  // Inicia o processo para parar o carro
+            
         }
     }
 

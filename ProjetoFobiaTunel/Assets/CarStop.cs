@@ -3,6 +3,7 @@ using System.Collections;
 
 public class CarStop : MonoBehaviour
 {
+    
     public float speed = 5f; // Velocidade do carro
     public float stopDuration = 3f; // Tempo parado antes de continuar
     private bool isStopped = false;
