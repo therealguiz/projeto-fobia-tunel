@@ -3,7 +3,6 @@ using System.Collections;
 
 public class CarStop : MonoBehaviour
 {
-    
     public float speed = 5f; // Velocidade do carro
     public float stopDuration = 3f; // Tempo parado antes de continuar
     private bool isStopped = false;
@@ -21,6 +20,9 @@ public class CarStop : MonoBehaviour
         if (other.CompareTag("TrafficStop"))
         {
             StartCoroutine(StopCar());
+
+            // Desativa o collider do trigger para evitar ativações duplas
+            other.GetComponent<Collider>().enabled = false;
         }
     }
 

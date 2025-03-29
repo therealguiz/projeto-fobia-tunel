@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class CarController : MonoBehaviour
 {
+    public AudioSource carFlashing;
     public AudioSource audioSource;
     public AudioSource audioSourceStop;
     public AudioSource audioLight;
@@ -45,6 +46,8 @@ public class CarController : MonoBehaviour
             audioSource.Play();
             audioSourceStop.Stop();
             audioLight.Play();
+            carFlashing.Play();
+            isSlowingDown = true;  // Inicia a desaceleração
             isSlowingDown = true;  // Inicia a desaceleração
             StartCoroutine(StopCar());  // Inicia o processo para parar o carro
             
